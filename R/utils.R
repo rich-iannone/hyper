@@ -1,4 +1,27 @@
 
+# Add a statement to the HTML object (`x`);
+# this is to be used internally by each
+# HTML constructor function whenever the
+# HTML object is passed to it
+#' @importFrom dplyr tibble bind_rows
+add_statement <- function(x,
+                          type,
+                          mode,
+                          text) {
+
+  stmt <-
+    dplyr::tibble(
+      type = as.character(type),
+      mode = as.character(mode),
+      text = as.character(text))
+
+  x$stmts <-
+    dplyr::bind_rows(
+      x$stmts,
+      stmt)
+
+  x
+}
 
 # Create a table based on an input list; this
 # is to detect whether there is the main data
