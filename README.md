@@ -14,3 +14,15 @@ You can install hyper from GitHub with:
 # install.packages("devtools")
 devtools::install_github("rich-iannone/hyper")
 ```
+
+If you encounter a bug or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rich-iannone/hyper/issues).
+
+Code of Conduct
+---------------
+
+[Contributor Code of Conduct](https://github.com/rich-iannone/hyper/blob/master/CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+License
+-------
+
+MIT © Richard Iannone
