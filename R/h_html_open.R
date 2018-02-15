@@ -24,9 +24,10 @@ h_html_open <- function(...) {
 
   if ((input_components_tbl %>% dplyr::pull(is_object))[1]) {
 
-    x <- (x %>% purrr::flatten())[1]
-    x <- add_statement(x, type, mode, text)
-    return(x)
+    x_out <- (x %>% purrr::flatten())[1]
+    x_out <- add_statement(x = x_out, type, mode, text)
+
+    return(x_out)
 
   } else {
 
