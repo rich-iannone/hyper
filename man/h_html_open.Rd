@@ -7,7 +7,7 @@
 h_html_open(...)
 }
 \description{
-Create an opening HTML tag
-either in standalone mode or as part of
-an HTML-build pipeline.
+Create an opening HTML tag either in
+standalone mode or as part of an
+HTML-build pipeline.
 }
