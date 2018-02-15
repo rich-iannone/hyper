@@ -1,4 +1,20 @@
 
+# Initialize an HTML object with whichever
+# `type`, `mode`, or `text` is required
+#' @importFrom dplyr tibble
+initialize_object <- function(x,
+                              type,
+                              mode,
+                              text) {
+
+  list(
+    stmts = dplyr::tibble(
+      type = type,
+      mode = mode,
+      text = text))
+}
+
+
 # Add a statement to the HTML object (`x`);
 # this is to be used internally by each
 # HTML constructor function whenever the
@@ -23,6 +39,7 @@ add_statement <- function(x,
   x
 }
 
+
 # Create a table based on an input list; this
 # is to detect whether there is the main data
 # object somewhere in the list
@@ -42,19 +59,22 @@ get_input_components <- function(object_list) {
             TRUE, FALSE))})
 }
 
+
 # Get a count of input components in the
 # table returned by `get_input_components()`
 count_input_components <- function(component_tbl) {
   nrow(component_tbl)
 }
 
+
 # Determine whether the input components contains
 # the HTML object as the first item
 is_object_in_input <- function(object_list) {
 
   (object_list %>%
-    dplyr::pull(is_object))[1]
+     dplyr::pull(is_object))[1]
 }
+
 
 # Determine whether the input components contains
 # the HTML object as the first item
@@ -72,6 +92,7 @@ wrap_in_tags <- function(text, tag, strip = NULL) {
   glue::glue("<{tag}>{text}</{tag}>") %>%
     as.character()
 }
+
 
 # Construct HTML using the HTML object
 #' @importFrom dplyr select pull
