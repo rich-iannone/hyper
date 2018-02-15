@@ -42,6 +42,37 @@ get_input_components <- function(object_list) {
             TRUE, FALSE))})
 }
 
+# Get a count of input components in the
+# table returned by `get_input_components()`
+count_input_components <- function(component_tbl) {
+  nrow(component_tbl)
+}
+
+# Determine whether the input components contains
+# the HTML object as the first item
+is_object_in_input <- function(object_list) {
+
+  (object_list %>%
+    dplyr::pull(is_object))[1]
+}
+
+# Determine whether the input components contains
+# the HTML object as the first item
+wrap_in_tags <- function(text, tag, strip = NULL) {
+
+  if (!is.null(strip)) {
+
+    text <-
+      text %>%
+      stringr::str_replace_all(
+        pattern = glue::glue("(<{strip}>|</{strip}>)"),
+        replacement = "")
+  }
+
+  glue::glue("<{tag}>{text}</{tag}>") %>%
+    as.character()
+}
+
 # Construct HTML using the HTML object
 #' @importFrom dplyr select pull
 generate_html_lines <- function(x) {
