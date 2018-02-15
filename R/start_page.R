@@ -11,7 +11,7 @@ start_page <- function() {
   list(
     name = "temp_name",
     stmts = dplyr::tibble(
-      type = c("_dtd"),
-      mode = c("singleton"),
-      text = c("<!DOCTYPE html>")))
+      type = "_dtd",
+      mode = "singleton",
+      text = "<!DOCTYPE html>"))
 }
