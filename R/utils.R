@@ -29,7 +29,7 @@ add_statement <- function(x,
 #' @importFrom purrr map_df
 #' @importFrom dplyr tibble
 #' @importFrom rlang has_name
-supplied_components_tbl <- function(object_list) {
+get_input_components <- function(object_list) {
 
   seq(object_list) %>%
     purrr::map_df(
