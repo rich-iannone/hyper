@@ -1,0 +1,22 @@
+Package: hyper
+Version: 0.0.0.9000
+Title: Construct HTML and Javascript Using Piped Functions
+Description: This package is part of an experiment for composing
+   HTML, CSS, and JavaScript using piped functions. A key consideration
+   is for flexible composability: use HTML-constructing functions,
+   use HTML fragments or Markdown, use R objects to bind data,
+   and also use nested pipelines for less typing.
+Authors@R: person("Richard", "Iannone", , "riannone@me.com", c("aut", "cre"))
+License: MIT + file LICENSE
+Imports:
+    glue (>= 1.2.0),
+    htmltools (>= 0.3.6),
+    magrittr (>= 1.5),
+    purrr (>= 0.2.3),
+    readr (>= 1.1.1),
+    rlang (>= 0.1.6),
+    rstudioapi (>= 0.7),
+    stringr (>= 1.2.0)
+Encoding: UTF-8
+LazyData: true
+ByteCompile: true
