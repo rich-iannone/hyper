@@ -38,8 +38,17 @@ get_input_components <- function(object_list) {
           list_item = x,
           is_object = ifelse(
             inherits(object_list[x], "list") &
-              object_list[[x]] %>% rlang::has_name(name = "name") &
               object_list[[x]] %>% rlang::has_name(name = "stmts"),
             TRUE, FALSE))})
+}
+
+# Construct HTML using the HTML object
+#' @importFrom dplyr select pull
+generate_html_lines <- function(x) {
+
+  x$stmts %>%
+    dplyr::select(text) %>%
+    dplyr::pull(text) %>%
+    paste(collapse = "\n")
 }
 
