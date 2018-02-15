@@ -1,7 +1,8 @@
 #' Create an opening HTML tag
-#' @description Create an opening HTML tag
-#' either in standalone mode or as part of
-#' an HTML-build pipeline.
+#'
+#' Create an opening HTML tag either in
+#' standalone mode or as part of an
+#' HTML-build pipeline.
 #' @importFrom dplyr pull
 #' @importFrom purrr flatten
 #' @export
