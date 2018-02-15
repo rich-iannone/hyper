@@ -5,11 +5,9 @@
 #' necessary document type declaration.
 #' @importFrom dplyr tibble
 #' @export
-#'
 start_page <- function() {
 
   list(
-    name = "temp_name",
     stmts = dplyr::tibble(
       type = "_dtd",
       mode = "singleton",
