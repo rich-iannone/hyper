@@ -3,14 +3,14 @@
 #' Create an HTML page object, which can
 #' be passed to other builder functions.
 #' This starts a page with the
-#' necessary document type declaration.
+#' necessary document type declaration
+#' and an opening \code{<html>} tag.
 #' @importFrom dplyr tibble
 #' @export
 start_page <- function() {
 
-  list(
-    stmts = dplyr::tibble(
-      type = "_dtd",
-      mode = "singleton",
-      text = "<!DOCTYPE html>"))
+  initialize_object(
+    type = c("_dtd", "html"),
+    mode = c("singleton", "opening"),
+    text = c("<!DOCTYPE HTML>", "<html>"))
 }
