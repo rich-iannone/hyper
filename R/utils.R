@@ -122,8 +122,8 @@ get_input_component_list <- function(object_list) {
 }
 
 
-# Determine whether the input components contains
-# the HTML object as the first item
+# Wrap text in tags and optionally strip away
+# existing tags
 wrap_in_tags <- function(text, tag, strip = NULL) {
 
   if (!is.null(strip)) {
