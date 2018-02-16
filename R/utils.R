@@ -46,7 +46,7 @@ add_statement <- function(x,
 #' @importFrom purrr map_df
 #' @importFrom dplyr tibble
 #' @importFrom rlang has_name
-get_input_components <- function(object_list) {
+get_input_component_tbl <- function(object_list) {
 
   seq(object_list) %>%
     purrr::map_df(
@@ -68,11 +68,57 @@ count_input_components <- function(component_tbl) {
 
 
 # Determine whether the input components contains
-# the HTML object as the first item
-is_object_in_input <- function(object_list) {
+# an HTML object as the first item
+#' @importFrom dplyr pull
+is_object_in_input_x <- function(component_tbl) {
 
-  (object_list %>%
+  if (nrow(component_tbl) < 1) return(FALSE)
+
+  (component_tbl %>%
      dplyr::pull(is_object))[1]
+}
+
+
+# Determine whether the input components contain
+# an HTML object as the second item
+#' @importFrom dplyr pull
+is_object_in_input_y <- function(component_tbl) {
+
+  if (nrow(component_tbl) < 2) return(FALSE)
+
+  (component_tbl %>%
+     dplyr::pull(is_object))[2]
+}
+
+
+# Get a count of all input components
+#' @importFrom dplyr filter
+count_input_objects <- function(component_tbl) {
+
+  if (nrow(component_tbl) < 1) return(0)
+
+  component_tbl %>%
+    dplyr::filter(is_object) %>%
+    nrow()
+}
+
+
+# Get a list with information on the
+# input components
+get_input_component_list <- function(object_list) {
+
+  input_component_tbl <- get_input_component_tbl(object_list)
+  input_component_count <- count_input_components(input_component_tbl)
+  input_contains_obj_x <- is_object_in_input_x(input_component_tbl)
+  input_contains_obj_y <- is_object_in_input_y(input_component_tbl)
+  input_object_count <- count_input_objects(input_component_tbl)
+
+  list(
+    input_component_tbl = input_component_tbl,
+    input_component_count = input_component_count,
+    input_contains_obj_x = input_contains_obj_x,
+    input_contains_obj_y = input_contains_obj_y,
+    input_object_count = input_object_count)
 }
 
 
