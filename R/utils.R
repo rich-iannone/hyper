@@ -46,16 +46,16 @@ add_statement <- function(x,
 #' @importFrom purrr map_df
 #' @importFrom dplyr tibble
 #' @importFrom rlang has_name
-get_input_component_tbl <- function(object_list) {
+get_input_component_tbl <- function(input_list) {
 
-  seq(object_list) %>%
+  seq(input_list) %>%
     purrr::map_df(
       .f = function(x) {
         dplyr::tibble(
           list_item = x,
           is_object = ifelse(
-            inherits(object_list[x], "list") &
-              object_list[[x]] %>% rlang::has_name(name = "stmts"),
+            inherits(input_list[x], "list") &
+              input_list[[x]] %>% rlang::has_name(name = "stmts"),
             TRUE, FALSE))})
 }
 
