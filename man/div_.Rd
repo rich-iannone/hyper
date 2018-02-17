@@ -7,7 +7,5 @@
 div_(...)
 }
 \description{
-Allows for the creation of an
-HTML paragraph ([<p>...</p>]) with
-whichever content is nested within.
+Allows for the creation of a [div] element.
 }
