@@ -121,21 +121,50 @@ get_input_component_list <- function(input_list) {
     input_object_count = input_object_count)
 }
 
+# Strip away tags of the provided name
+#' @importFrom stringr str_replace_all
+#' @importFrom glue glue
+strip_outer_tags <- function(text, to_strip) {
+
+  text %>%
+    stringr::str_replace_all(
+      pattern = glue::glue("(<{to_strip}>|</{to_strip}>)"),
+      replacement = "")
+}
+
+# Remove trailing linebreaks from a character vector
+#' @importFrom stringr str_replace
+remove_trailing_linebreaks <- function(text) {
+
+  text %>%
+    stringr::str_replace(
+      pattern = "\n$",
+      replacement = "")
+}
+
 
 # Wrap text in tags and optionally strip away
 # existing tags
+#' @importFrom glue glue
 wrap_in_tags <- function(text, tag, strip = NULL) {
 
   if (!is.null(strip)) {
 
     text <-
       text %>%
-      stringr::str_replace_all(
-        pattern = glue::glue("(<{strip}>|</{strip}>)"),
-        replacement = "")
+      strip_outer_tags(to_strip = strip)
   }
 
   glue::glue("<{tag}>{text}</{tag}>") %>%
+    as.character()
+}
+
+# With an input list, extract components with
+# index greater than the `start` value and
+# create a character vector from those
+get_list_items_as_char <- function(input_list, start = 2) {
+
+  input_list[start:length(input_list)] %>%
     as.character()
 }
 
