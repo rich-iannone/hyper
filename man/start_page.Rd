@@ -10,5 +10,5 @@ start_page()
 Create an HTML page object, which can
 be passed to other builder functions.
 This starts a page with the
-necessary document type declaration.
+necessary components.
 }
