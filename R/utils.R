@@ -75,7 +75,7 @@ is_object_in_input_x <- function(component_tbl) {
   if (nrow(component_tbl) < 1) return(FALSE)
 
   (component_tbl %>%
-     dplyr::pull(is_object))[1]
+      dplyr::pull(is_object))[1]
 }
 
 
@@ -87,7 +87,7 @@ is_object_in_input_y <- function(component_tbl) {
   if (nrow(component_tbl) < 2) return(FALSE)
 
   (component_tbl %>%
-     dplyr::pull(is_object))[2]
+      dplyr::pull(is_object))[2]
 }
 
 
@@ -105,9 +105,9 @@ count_input_objects <- function(component_tbl) {
 
 # Get a list with information on the
 # input components
-get_input_component_list <- function(object_list) {
+get_input_component_list <- function(input_list) {
 
-  input_component_tbl <- get_input_component_tbl(object_list)
+  input_component_tbl <- get_input_component_tbl(input_list)
   input_component_count <- count_input_components(input_component_tbl)
   input_contains_obj_x <- is_object_in_input_x(input_component_tbl)
   input_contains_obj_y <- is_object_in_input_y(input_component_tbl)
