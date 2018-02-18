@@ -146,7 +146,7 @@ remove_trailing_linebreaks <- function(text) {
 
 
 # Are any components of the input list element attributes?
-#' @importFrom rlang have_name is
+#' @importFrom rlang have_name
 has_attr_components <- function(input_list) {
 
   any(rlang::have_name(input_list[seq(length(input_list))]))
@@ -172,7 +172,7 @@ has_text_components <- function(input_list) {
 
 
 # Extract attribute components from an input list
-#' @importFrom is_named
+#' @importFrom rlang is_named
 #' @importFrom glue glue
 get_attr_components <- function(input_list) {
 
