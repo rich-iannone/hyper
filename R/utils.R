@@ -48,15 +48,15 @@ add_statement <- function(x,
 #' @importFrom rlang has_name
 get_input_component_tbl <- function(input_list) {
 
-  seq(input_list) %>%
-    purrr::map_df(
-      .f = function(x) {
-        dplyr::tibble(
-          list_item = x,
-          is_object = ifelse(
-            inherits(input_list[x], "list") &
-              input_list[[x]] %>% rlang::has_name(name = "stmts"),
-            TRUE, FALSE))})
+    seq(input_list) %>%
+      purrr::map_df(
+        .f = function(x) {
+          dplyr::tibble(
+            list_item = x,
+            is_object = ifelse(
+              inherits(input_list[x], "list") &
+                input_list[[x]] %>% rlang::has_name(name = "stmts"),
+              TRUE, FALSE))})
 }
 
 
@@ -121,6 +121,7 @@ get_input_component_list <- function(input_list) {
     input_object_count = input_object_count)
 }
 
+
 # Strip away tags of the provided name
 #' @importFrom stringr str_replace_all
 #' @importFrom glue glue
@@ -132,6 +133,7 @@ strip_outer_tags <- function(text, to_strip) {
       replacement = "")
 }
 
+
 # Remove trailing linebreaks from a character vector
 #' @importFrom stringr str_replace
 remove_trailing_linebreaks <- function(text) {
@@ -140,6 +142,72 @@ remove_trailing_linebreaks <- function(text) {
     stringr::str_replace(
       pattern = "\n$",
       replacement = "")
+}
+
+
+# Are any components of the input list element attributes?
+#' @importFrom rlang have_name is
+has_attr_components <- function(input_list) {
+
+  any(rlang::have_name(input_list[seq(length(input_list))]))
+}
+
+
+# Are any components of the input list entirely textual?
+#' @importFrom rlang have_name
+has_text_components <- function(input_list) {
+
+  are_text_components <- vector(mode = "logical")
+
+  for (i in seq(length(input_list))) {
+
+    are_text_components <-
+      c(are_text_components,
+        !rlang::have_name(input_list[i]) &
+          inherits(input_list[[i]], "character"))
+  }
+
+  any(are_text_components)
+}
+
+
+# Extract attribute components from an input list
+#' @importFrom is_named
+#' @importFrom glue glue
+get_attr_components <- function(input_list) {
+
+  html_attrs <- vector(mode = "character")
+
+  for (i in seq(length(input_list))) {
+
+    if (rlang::is_named(input_list[i])) {
+      html_attrs <-
+        c(html_attrs,
+          glue::glue("{names(input_list[i])}=\"{unname(input_list[i])}\"") %>%
+            as.character())
+    }
+  }
+
+  html_attrs
+}
+
+
+# Extract textual components from an input list
+#' @importFrom rlang have_name
+get_text_components <- function(input_list) {
+
+  are_text_components <- vector(mode = "logical")
+
+  for (i in seq(length(input_list))) {
+
+    are_text_components <-
+      c(are_text_components,
+        !rlang::have_name(input_list[i]) &
+          inherits(input_list[[i]], "character"))
+  }
+
+  input_list[which(are_text_components)] %>%
+    as.character()
 }
 
 
@@ -158,6 +226,7 @@ wrap_in_tags <- function(text, tag, strip = NULL) {
   glue::glue("<{tag}>{text}</{tag}>") %>%
     as.character()
 }
+
 
 # With an input list, extract components with
 # index greater than the `start` value and
