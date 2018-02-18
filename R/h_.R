@@ -12,7 +12,7 @@ h_ <- function(..., level = 1) {
 
   # Define main attributes of constructor
   type <- glue::glue("h{level}") %>% as.character()
-  mode <- "opening_closing"
+  mode <- "open_close"
 
   # Gather list of input data
   x_in <- list(...)
