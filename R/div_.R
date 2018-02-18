@@ -30,7 +30,7 @@ div_ <- function(...) {
     dplyr::distinct() %>%
     dplyr::pull(type)
 
-  if (!(all(c("_dtd", "html") %in% input_component_lineage))) {
+  if (!(all(c("_dtd", "html", "body") %in% input_component_lineage))) {
 
     stop("The `div` element must be contained within <body>...</body>",
          call. = FALSE)
