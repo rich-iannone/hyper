@@ -7,8 +7,8 @@ div_ <- function(...) {
 
   # Main attributes of constructor
   type <- "div"
-  mode_1 <- "opening"
-  mode_2 <- "closing"
+  mode_1 <- "open"
+  mode_2 <- "close"
 
   x_in <- list(...)
 
@@ -49,13 +49,13 @@ div_ <- function(...) {
     tag_begin <-
       initialize_object(
         type = type,
-        mode = "opening",
+        mode = "open",
         text = x_text_1)
 
     tag_end <-
       initialize_object(
         type = type,
-        mode = "closing",
+        mode = "close",
         text = x_text_2)
 
     x_out <-
@@ -85,13 +85,13 @@ div_ <- function(...) {
     tag_begin <-
       initialize_object(
         type = type,
-        mode = "opening",
+        mode = "open",
         text = x_text_1)
 
     tag_end <-
       initialize_object(
         type = type,
-        mode = "closing",
+        mode = "close",
         text = x_text_2)
 
     x_out <-
