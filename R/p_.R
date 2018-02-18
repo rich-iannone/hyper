@@ -5,15 +5,31 @@
 #' whichever content is nested within.
 #' @importFrom commonmark markdown_html
 #' @importFrom dplyr bind_rows
+#' @importFrom glue glue
+#' @importFrom rlang prepend
 #' @export
 p_ <- function(...) {
 
   # Define main attributes of constructor
   type <- "p"
-  mode <- "opening_closing"
+  mode <- "open_close"
 
   # Gather list of input data
   x_in <- list(...)
+
+  attrs_spacer <- ifelse(has_attr_components(x_in), " ", "")
+
+  x_attr <- get_attr_components(x_in) %>% paste(collapse = " ")
+  x_text <- get_text_components(x_in) %>% paste(collapse = " ")
+
+  open_tag <-
+    glue::glue("<{type}{attrs_spacer}{x_attr}>") %>%
+    as.character() %>%
+    trimws()
+
+  close_tag <-
+    glue::glue("</{type}>") %>%
+    as.character()
 
   # Get the input components to the function
   input_component_list <-
@@ -26,7 +42,8 @@ p_ <- function(...) {
       initialize_object(
         type = type,
         mode = mode,
-        text = "<p></p>")
+        text = glue::glue("{open_tag}{close_tag}") %>%
+          as.character())
 
     return(x_out)
   }
@@ -38,12 +55,14 @@ p_ <- function(...) {
 
     # Handle text components
     x_text <-
-      x_in %>%
+      x_text %>%
       paste(collapse = " ") %>%
       commonmark::markdown_html() %>%
       strip_outer_tags("p") %>%
-      remove_trailing_linebreaks %>%
-      wrap_in_tags(type)
+      remove_trailing_linebreaks() %>%
+      rlang::prepend(open_tag) %>%
+      append(close_tag) %>%
+      paste(collapse = "")
 
     x_out <-
       initialize_object(
@@ -59,22 +78,15 @@ p_ <- function(...) {
   if (input_component_list$input_object_count == 1 &
       input_component_list$input_contains_obj_x) {
 
-    # Handle text components
-    if (input_component_list$input_component_count >
-        input_component_list$input_object_count) {
-
-      x_text <-
-        get_list_items_as_char(x_in, start = 2) %>%
-        paste(collapse = " ") %>%
-        commonmark::markdown_html() %>%
-        strip_outer_tags("p") %>%
-        remove_trailing_linebreaks %>%
-        wrap_in_tags(type)
-
-    } else {
-
-      x_text <- "" %>% wrap_in_tags(type)
-    }
+    x_text <-
+      x_text %>%
+      paste(collapse = " ") %>%
+      commonmark::markdown_html() %>%
+      strip_outer_tags("p") %>%
+      remove_trailing_linebreaks() %>%
+      rlang::prepend(open_tag) %>%
+      append(close_tag) %>%
+      paste(collapse = "")
 
     input_component_x <- x_in[[1]]
 
