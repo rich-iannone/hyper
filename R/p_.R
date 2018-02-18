@@ -4,6 +4,7 @@
 #' HTML paragraph ([<p>...</p>]) with
 #' whichever content is nested within.
 #' @importFrom commonmark markdown_html
+#' @importFrom dplyr bind_rows
 #' @export
 p_ <- function(...) {
 
@@ -86,11 +87,10 @@ p_ <- function(...) {
     x_out <-
       list(
         stmts =
-          bind_rows(
+          dplyr::bind_rows(
             input_component_x$stmts,
             input_component_y$stmts))
 
     return(x_out)
   }
 }
-

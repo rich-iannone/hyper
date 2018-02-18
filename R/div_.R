@@ -1,7 +1,7 @@
 #' Create a div element
 #'
 #' Allows for the creation of a [div] element.
-#' @importFrom dplyr select distinct pull
+#' @importFrom dplyr select distinct pull bind_rows
 #' @export
 div_ <- function(...) {
 
@@ -61,7 +61,7 @@ div_ <- function(...) {
     x_out <-
       list(
         stmts =
-          bind_rows(
+          dplyr::bind_rows(
             input_component_x$stmts,
             tag_begin$stmts,
             tag_end$stmts))
@@ -97,7 +97,7 @@ div_ <- function(...) {
     x_out <-
       list(
         stmts =
-          bind_rows(
+          dplyr::bind_rows(
             input_component_x$stmts,
             tag_begin$stmts,
             input_component_y$stmts,
