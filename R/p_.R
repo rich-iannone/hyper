@@ -6,7 +6,6 @@
 #' @importFrom commonmark markdown_html
 #' @importFrom dplyr bind_rows
 #' @importFrom glue glue
-#' @importFrom rlang prepend
 #' @export
 p_ <- function(...,
                id = NULL,
