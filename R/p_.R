@@ -1,8 +1,47 @@
 #' Create a paragraph element
 #'
-#' Allows for the creation of an
-#' HTML paragraph ([<p>...</p>]) with
-#' whichever content is nested within.
+#' Allows for the creation of an HTML paragraph
+#' ([<p>...</p>]) with whichever content is nested
+#' within.
+#' @param ... a collection of HTML objects, textual
+#' elements (as bare text or Markdown-styled text),
+#' arbitrary attributes (given as named variables).
+#' @param id a global attribute for specifying a
+#' unique ID for an HTML element (the value must
+#' be unique within the HTML document, though, this
+#' is not currently enforced here). The primary use
+#' of the [id] attribute is to point to a style in a
+#' style sheet. The [id] is also used by JavaScript
+#' (via the HTML DOM) to manipulate the element with
+#' the specific [id]. When constructing an [id],
+#' there are a few other things to note: (1) it must
+#' contain at least one character, (2) it must not
+#' contain any space characters, and (3) in HTML,
+#' all values are case-insensitive.
+#' @param class a global attribute for specifying
+#' one or more classnames for an element. The [class]
+#' attribute is primarily used in pointing to a class
+#' in a style sheet. However, this attribute can
+#' also be used by a JavaScript (via the HTML DOM)
+#' to make changes to HTML elements with a specified
+#' class. If providing several classes, one can
+#' either use [c(*classname1*, *classname2*, ...)] or
+#' a single string with space-separated class names.
+#' When constructing [class] names, there are two
+#' things to keep in mind: (1) they begin with a
+#' letter (A-Z or a-z), and (2) subsequent characters
+#' can be letters (A-Za-z), digits (0-9), hyphens
+#' ("-"), and underscores ("_").
+#' @param global provides an opportunity to supply
+#' global attributes other than the [id] and [class]
+#' attributes (which have their own arguments). This
+#' is most easily accomplished via the namesake
+#' [global()] function since it allows for inline
+#' help and validation for each of the global
+#' attributes. For example, setting the global
+#' attributes [title] and [lang] can be done by
+#' this:
+#' [global = global(lang = "en", title = "my_title")].
 #' @importFrom commonmark markdown_html
 #' @importFrom dplyr bind_rows
 #' @importFrom glue glue
