@@ -71,6 +71,7 @@ p_ <- function(...,
   # Case where there is no input object
   if (input_component_list$input_object_count == 0) {
 
+    # Generate a standalone HTML object
     x_out <-
       initialize_object(
         type = type,
@@ -84,14 +85,17 @@ p_ <- function(...,
   if (input_component_list$input_object_count == 1 &
       input_component_list$input_contains_obj_x) {
 
-    input_component_x <- x_in[[1]]
+    # Collect the existing input HTML object
+    input_component_x <- get_object_in_input_x(input_list = x_in)
 
+    # Generate the new input HTML object to be added
     input_component_y <-
       initialize_object(
         type = type,
         mode = mode,
         text = html_element)
 
+    # Combine the HTML objects
     x_out <-
       list(
         stmts =
