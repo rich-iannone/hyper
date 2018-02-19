@@ -1,15 +1,21 @@
 #' Create a div element
 #'
 #' Allows for the creation of a [div] element.
+#' @inherit p_ return params
 #' @importFrom dplyr select distinct pull bind_rows
 #' @export
-div_ <- function(...) {
+div_ <- function(...,
+                 id = NULL,
+                 class = NULL,
+                 global = NULL) {
 
-  # Main attributes of constructor
-  type <- "div"
+  # Define main attributes of constructor
+  type <- get_tag_name()
+
   mode_1 <- "open"
   mode_2 <- "close"
 
+  # Gather list of input data
   x_in <- list(...)
 
   # Get the input components to the function
@@ -36,35 +42,62 @@ div_ <- function(...) {
          call. = FALSE)
   }
 
+  # Generate `id` statement
+  id_statement <- generate_id_stmt(id)
+
+  # Generate `class` statement
+  class_statement <- generate_class_stmt(class)
+
+  # Generate statements based on `global` atttributes
+  global_statements <- get_attr_components(global)
+
+  # Generate arbitrary statements found in the input list
+  extra_statements <- get_attr_components(x_in)
+
+  # Collect all opening tag attributes
+  tag_attrs <-
+    collect_all_attrs(
+      id_statement,
+      class_statement,
+      global_statements,
+      extra_statements)
+
+  # Create the opening tag
+  opening_tag <-
+    create_opening_tag(
+      type = type,
+      attrs_str = tag_attrs)
+
+  # Create the closing tag
+  closing_tag <-
+    create_closing_tag(type = type)
+
   # Case where there is an input object
-  # and possibly some input components
   if (input_component_list$input_object_count == 1 &
       input_component_list$input_contains_obj_x) {
 
-    x_text_1 <- "<div>"
-    x_text_2 <- "</div>"
+    # Collect the existing input HTML object
+    input_component_x <- get_object_in_input_x(input_list = x_in)
 
-    input_component_x <- x_in[[1]]
-
-    tag_begin <-
+    tag_begin_section <-
       initialize_object(
         type = type,
         mode = "open",
-        text = x_text_1)
+        text = opening_tag)
 
-    tag_end <-
+    tag_end_section <-
       initialize_object(
         type = type,
         mode = "close",
-        text = x_text_2)
+        text = closing_tag)
 
     x_out <-
       list(
         stmts =
           dplyr::bind_rows(
             input_component_x$stmts,
-            tag_begin$stmts,
-            tag_end$stmts))
+            tag_begin_section$stmts,
+            tag_end_section$stmts))
 
     return(x_out)
   }
@@ -75,33 +108,32 @@ div_ <- function(...) {
       input_component_list$input_contains_obj_x &
       input_component_list$input_contains_obj_y) {
 
-    x_text_1 <- "<div>"
-    x_text_2 <- "</div>"
+    # Collect the existing input HTML object
+    input_component_x <- get_object_in_input_x(input_list = x_in)
 
-    input_component_x <- x_in[[1]]
+    # Collect the secondary input HTML object
+    input_component_y <- get_object_in_input_y(input_list = x_in)
 
-    input_component_y <- x_in[[2]]
-
-    tag_begin <-
+    tag_begin_section <-
       initialize_object(
         type = type,
         mode = "open",
-        text = x_text_1)
+        text = opening_tag)
 
-    tag_end <-
+    tag_end_section <-
       initialize_object(
         type = type,
         mode = "close",
-        text = x_text_2)
+        text = closing_tag)
 
     x_out <-
       list(
         stmts =
           dplyr::bind_rows(
             input_component_x$stmts,
-            tag_begin$stmts,
+            tag_begin_section$stmts,
             input_component_y$stmts,
-            tag_end$stmts))
+            tag_end_section$stmts))
 
     return(x_out)
   }
