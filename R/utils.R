@@ -21,7 +21,7 @@ get_tag_name <- function() {
 
   calling_fcn <- deparse(sys.call(-1))
 
-  calling_fcn %>% stringr::str_extract(pattern = "[a-z]*")
+  (calling_fcn %>% stringr::str_extract(pattern = "[a-z]*"))[1]
 }
 
 
