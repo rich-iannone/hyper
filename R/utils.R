@@ -15,6 +15,16 @@ initialize_object <- function(x,
 }
 
 
+# Get the tag name from the calling function
+#' @importFrom stringr str_extract
+get_tag_name <- function() {
+
+  calling_fcn <- deparse(sys.call(-1))
+
+  calling_fcn %>% stringr::str_extract(pattern = "[a-z]*")
+}
+
+
 # Create a table based on an input list; this
 # is to detect whether there is the main data
 # object somewhere in the list
