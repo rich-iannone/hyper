@@ -3,6 +3,7 @@
 export("%>%")
 export(add_title_element)
 export(div_)
+export(global)
 export(h1_)
 export(h2_)
 export(h3_)
