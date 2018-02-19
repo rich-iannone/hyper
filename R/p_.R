@@ -9,7 +9,8 @@
 #' @export
 p_ <- function(...,
                id = NULL,
-               class = NULL) {
+               class = NULL,
+               global = NULL) {
 
   # Define main attributes of constructor
   type <- "p"
@@ -24,12 +25,19 @@ p_ <- function(...,
   # Generate `class` statement
   class_statement <- generate_class_stmt(class)
 
-  # Collect all opening tag attrs
+  # Generate statements based on `global` atttributes
+  global_statements <- get_attr_components(global)
+
+  # Generate arbitrary statements found in the input list
+  extra_statements <- get_attr_components(x_in)
+
+  # Collect all opening tag attributes
   tag_attrs <-
     collect_all_attrs(
       id_statement,
       class_statement,
-      get_attr_components(x_in))
+      global_statements,
+      extra_statements)
 
   # Create the opening tag
   opening_tag <-
