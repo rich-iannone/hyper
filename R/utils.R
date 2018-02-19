@@ -210,6 +210,21 @@ get_text_components <- function(input_list) {
     as.character()
 }
 
+
+# Extract the input HTML object that resides
+# as the first item in the input component list
+get_object_in_input_x <- function(input_list) {
+  input_list[[1]]
+}
+
+
+# Extract the input HTML object that resides
+# as the second item in the input component list
+get_object_in_input_y <- function(input_list) {
+  input_list[[2]]
+}
+
+
 # Generate an `id` statement
 generate_id_stmt <- function(id) {
 
