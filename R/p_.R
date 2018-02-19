@@ -13,7 +13,7 @@ p_ <- function(...,
                global = NULL) {
 
   # Define main attributes of constructor
-  type <- "p"
+  type <- get_tag_name()
   mode <- "open_close"
 
   # Gather list of input data
