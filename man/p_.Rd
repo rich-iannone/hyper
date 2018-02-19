@@ -4,7 +4,7 @@
 \alias{p_}
 \title{Create a paragraph element}
 \usage{
-p_(...)
+p_(..., id = NULL, class = NULL)
 }
 \description{
 Allows for the creation of an
