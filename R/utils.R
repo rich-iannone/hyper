@@ -210,6 +210,78 @@ get_text_components <- function(input_list) {
     as.character()
 }
 
+# Generate an `id` statement
+generate_id_stmt <- function(id) {
+
+  if (!is.null(id)) {
+    id_statement <- paste0("id=\"", id[1], "\"")
+  } else {
+    id_statement <- ""
+  }
+
+  id_statement
+}
+
+
+# Generate a `class` statement
+generate_class_stmt <- function(class) {
+
+  if (!is.null(class)) {
+    class_statement <- paste0("class=\"", paste(class, collapse = " "), "\"")
+  } else {
+    class_statement <- ""
+  }
+
+  class_statement
+}
+
+
+# Collect all attr statements (whichever they may
+# be for a given tag) and generate a clean string
+# to insert in the opening tag
+#' @importFrom rlang squash_chr
+collect_all_attrs <- function(...) {
+
+  list(...) %>%
+    rlang::squash_chr() %>%
+    paste(collapse = " ") %>%
+    trimws()
+}
+
+
+# Create an opening tag from a predefined type
+# and an attribute string
+#' @importFrom glue glue
+create_opening_tag <- function(type, attrs_str) {
+
+  if (attrs_str != "" & attrs_str != " ") {
+    glue::glue("<{type} {attrs_str}>") %>%
+      as.character() %>% trimws()
+  } else {
+    glue::glue("<{type}>") %>% as.character()
+  }
+}
+
+
+# Create a closing tag from a predefined type
+#' @importFrom glue glue
+create_closing_tag <- function(type) {
+
+  glue::glue("</{type}>") %>% as.character()
+}
+
+
+# Generate a complete HTML element with opening and
+# closing tags, and, the content
+#' @importFrom glue glue
+create_html_element <- function(opening_tag,
+                                closing_tag,
+                                content) {
+
+  glue::glue("{opening_tag}{content}{closing_tag}") %>%
+    as.character()
+}
+
 
 # Wrap text in tags and optionally strip away
 # existing tags
