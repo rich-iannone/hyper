@@ -42,6 +42,7 @@
 #' @param translate specifies whether the content of an
 #' element should be translated or not. This can either be
 #' [yes] or [no].
+#' @importFrom purrr map_chr
 #' @export
 
 global <- function(style = NULL,
