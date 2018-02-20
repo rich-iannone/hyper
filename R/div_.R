@@ -1,6 +1,6 @@
 #' Create a div element
 #'
-#' Allows for the creation of a [div] element.
+#' Allows for the creation of a \code{div} element.
 #' @inherit p_ return params
 #' @importFrom dplyr select distinct pull bind_rows
 #' @export
@@ -10,7 +10,7 @@ div_ <- function(...,
                  global = NULL) {
 
   # Define main attributes of constructor
-  type <- get_tag_name()
+  tag_name <- get_tag_name()
 
   mode_1 <- "open"
   mode_2 <- "close"
@@ -65,12 +65,12 @@ div_ <- function(...,
   # Create the opening tag
   opening_tag <-
     create_opening_tag(
-      type = type,
+      type = tag_name,
       attrs_str = tag_attrs)
 
   # Create the closing tag
   closing_tag <-
-    create_closing_tag(type = type)
+    create_closing_tag(type = tag_name)
 
   # Case where there is an input object
   if (input_component_list$input_object_count == 1 &
@@ -81,13 +81,13 @@ div_ <- function(...,
 
     tag_begin_section <-
       initialize_object(
-        type = type,
+        type = tag_name,
         mode = "open",
         text = opening_tag)
 
     tag_end_section <-
       initialize_object(
-        type = type,
+        type = tag_name,
         mode = "close",
         text = closing_tag)
 
@@ -116,13 +116,13 @@ div_ <- function(...,
 
     tag_begin_section <-
       initialize_object(
-        type = type,
+        type = tag_name,
         mode = "open",
         text = opening_tag)
 
     tag_end_section <-
       initialize_object(
-        type = type,
+        type = tag_name,
         mode = "close",
         text = closing_tag)
 
