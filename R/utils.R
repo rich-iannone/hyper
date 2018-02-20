@@ -134,6 +134,8 @@ remove_trailing_linebreaks <- function(text) {
 #' @importFrom rlang have_name
 has_attr_components <- function(input_list) {
 
+  if (length(input_list) == 0) return(FALSE)
+
   any(rlang::have_name(input_list[seq(length(input_list))]))
 }
 
@@ -141,6 +143,8 @@ has_attr_components <- function(input_list) {
 # Are any components of the input list entirely textual?
 #' @importFrom rlang have_name
 has_text_components <- function(input_list) {
+
+  if (length(input_list) == 0) return(FALSE)
 
   are_text_components <- vector(mode = "logical")
 
@@ -236,7 +240,7 @@ generate_id_stmt <- function(id = NULL) {
 
 
 # Generate a `class` statement
-generate_class_stmt <- function(class) {
+generate_class_stmt <- function(class = NULL) {
 
   if (!is.null(class)) {
     class_statement <- paste0("class=\"", paste(class, collapse = " "), "\"")
