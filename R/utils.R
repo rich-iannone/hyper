@@ -210,8 +210,20 @@ get_object_in_input_y <- function(input_list) {
 }
 
 
+# Generate a generic statement
+generate_stmt <- function(attr_name, attr_value = NULL) {
+
+  if (!is.null(attr_value)) {
+    stmt <- paste0(attr_name, "=\"", as.character(attr_value[1]), "\"")
+  } else {
+    stmt <- ""
+  }
+
+  stmt
+}
+
 # Generate an `id` statement
-generate_id_stmt <- function(id) {
+generate_id_stmt <- function(id = NULL) {
 
   if (!is.null(id)) {
     id_statement <- paste0("id=\"", id[1], "\"")
