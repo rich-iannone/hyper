@@ -287,8 +287,11 @@ create_closing_tag <- function(type) {
 # closing tags, and, the content
 #' @importFrom glue glue
 create_html_element <- function(opening_tag,
-                                closing_tag,
-                                content) {
+                                closing_tag = NULL,
+                                content = NULL) {
+
+  if (is.null(closing_tag)) closing_tag <- ""
+  if (is.null(content)) content <- ""
 
   glue::glue("{opening_tag}{content}{closing_tag}") %>%
     as.character()
