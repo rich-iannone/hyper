@@ -1,7 +1,23 @@
 #' Create a div element
 #'
-#' Allows for the creation of a \code{div} element.
+#' Allows for the creation of a \code{<div>}
+#' element. The \code{<div>} element allows
+#' you to break up an HTML page into sections.
+#' The `div_()` function makes this possible
+#' by allowing nested paragraphs and other
+#' block-level elements as inputs.
 #' @inherit p_ return params
+#' @examples
+#' # Create a page with two <div>s with
+#' # distinct ids and a paragraph within each
+#' page <- start_page() %>%
+#'   div_(id = "first_div",
+#'     p_("This is in the *first* div")) %>%
+#'   div_(id = "second_div",
+#'     p_("This is in the *second* div"))
+#'
+#' # View the rendered page
+#' page %>% show_in_viewer()
 #' @importFrom dplyr select distinct pull bind_rows
 #' @export
 div_ <- function(...,
