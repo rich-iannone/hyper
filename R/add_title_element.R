@@ -29,7 +29,7 @@ add_title_element <- function(x,
     dplyr::distinct() %>%
     dplyr::pull(type)
 
-  if (!(all(c("_dtd", "html", "body") %in% input_component_lineage))) {
+  if (!(all(c("_dtd", "html", "head", "body") %in% input_component_lineage))) {
 
     stop("A title element can only be added once the main elements of the page are available",
          call. = FALSE)
