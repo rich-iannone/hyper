@@ -6,6 +6,9 @@
 \usage{
 add_title_element(x, title)
 }
+\arguments{
+\item{title}{the title of the HTML document.}
+}
 \description{
 Add a title to the HTML document.
 }
