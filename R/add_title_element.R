@@ -1,11 +1,14 @@
 #' Add the title element to the HTML head
 #'
 #' Add a title to the HTML document.
+#' @param title the title of the HTML document.
 #' @importFrom dplyr select distinct pull filter
 #' @importFrom tibble rownames_to_column add_row
 #' @export
-add_title_element <- function(x, title) {
+add_title_element <- function(x,
+                              title) {
 
+  # Gather list of input data
   x_in <- list(x)
 
   # Get the input components to the function
