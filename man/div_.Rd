@@ -56,5 +56,22 @@ the global attributes \code{title} and
 \code{global = global(lang = "en", title = "my_title")}.}
 }
 \description{
-Allows for the creation of a \code{div} element.
+Allows for the creation of a \code{<div>}
+element. The \code{<div>} element allows
+you to break up an HTML page into sections.
+The `div_()` function makes this possible
+by allowing nested paragraphs and other
+block-level elements as inputs.
+}
+\examples{
+# Create a page with two <div>s with
+# distinct ids and a paragraph within each
+page <- start_page() \%>\%
+  div_(id = "first_div",
+    p_("This is in the *first* div")) \%>\%
+  div_(id = "second_div",
+    p_("This is in the *second* div"))
+
+# View the rendered page
+page \%>\% show_in_viewer()
 }
