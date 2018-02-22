@@ -332,12 +332,28 @@ get_list_items_as_char <- function(input_list, start = 2) {
 
 
 # Construct HTML using the HTML object
-#' @importFrom dplyr select pull
+#' @importFrom dplyr mutate select pull
+#' @importFrom stringr str_pad
+#' @importFrom tibble add_row
 generate_html_lines <- function(x) {
 
   x$stmts %>%
+    tibble::add_row(
+      type = "body",
+      mode = "close",
+      level = 1L,
+      text = "</body>") %>%
+    tibble::add_row(
+      type = "html",
+      mode = "close",
+      level = 0L,
+      text = "</html>") %>%
+    dplyr::mutate(
+      text = stringr::str_pad(
+        string = text,
+        side = "left",
+        width = nchar(text) + (2 * level))) %>%
     dplyr::select(text) %>%
     dplyr::pull(text) %>%
     paste(collapse = "\n")
 }
-
