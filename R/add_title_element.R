@@ -49,6 +49,7 @@ add_title_element <- function(x,
     tibble::add_row(
       type = "title",
       mode = "open_close",
+      level = 2L,
       text = x_text,
       .before = head_end_row)
 
