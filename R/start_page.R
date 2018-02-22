@@ -27,6 +27,7 @@ start_page <- function() {
       "_dtd", "html", "head", "head", "body"),
     mode = c(
       "empty", "open", "open", "close", "open"),
+    level = c(0L, 0L, 1L, 1L, 1L),
     text = c(
       "<!DOCTYPE HTML>", "<html>", "<head>", "</head>", "<body>"))
 }
