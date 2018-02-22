@@ -1,14 +1,10 @@
-#' Show constructed HTML content in the
-#' RStudio Viewer pane
+#' View the HTML page
 #'
-#' View the state of the HTML object
-#' in the RStudio Viewer. Stepwise
-#' constructor functions are used to
-#' build the page.
+#' View the HTML object in the RStudio Viewer.
 #' @importFrom dplyr pull
 #' @importFrom rstudioapi viewer
 #' @export
-show_in_viewer <- function(x) {
+view_page <- function(x) {
 
   html_lines <- generate_html_lines(x)
 
