@@ -119,6 +119,7 @@ p_ <- function(...,
       initialize_object(
         type = tag_name,
         mode = mode,
+        level = 2L,
         text = html_element)
 
     return(x_out)
@@ -136,6 +137,7 @@ p_ <- function(...,
       initialize_object(
         type = tag_name,
         mode = mode,
+        level = 2L,
         text = html_element)
 
     # Combine the HTML objects

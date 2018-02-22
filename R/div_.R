@@ -99,12 +99,14 @@ div_ <- function(...,
       initialize_object(
         type = tag_name,
         mode = "open",
+        level = 1L,
         text = opening_tag)
 
     tag_end_section <-
       initialize_object(
         type = tag_name,
         mode = "close",
+        level = 1L,
         text = closing_tag)
 
     x_out <-
@@ -134,12 +136,14 @@ div_ <- function(...,
       initialize_object(
         type = tag_name,
         mode = "open",
+        level = 1L,
         text = opening_tag)
 
     tag_end_section <-
       initialize_object(
         type = tag_name,
         mode = "close",
+        level = 1L,
         text = closing_tag)
 
     x_out <-
