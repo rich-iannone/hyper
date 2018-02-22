@@ -5,12 +5,14 @@
 initialize_object <- function(x,
                               type,
                               mode,
+                              level,
                               text) {
 
   list(
     stmts = dplyr::tibble(
       type = type,
       mode = mode,
+      level = level,
       text = text))
 }
 
