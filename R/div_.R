@@ -2,10 +2,10 @@
 #'
 #' Allows for the creation of a \code{<div>}
 #' element. The \code{<div>} element allows
-#' you to break up an HTML page into sections.
-#' The `div_()` function makes this possible
-#' by allowing nested paragraphs and other
-#' block-level elements as inputs.
+#' you to break up an HTML page into arbitrary
+#' sections. The `div_()` function makes this
+#' possible by allowing nested paragraphs and
+#' other block-level elements as inputs.
 #' @inherit p_ return params
 #' @examples
 #' # Create a page with two <div>s with
